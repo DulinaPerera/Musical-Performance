@@ -1,0 +1,543 @@
+/***********************************************************************************package performance***********************************************************************************/
+
+
+
+
+
+package performance;
+
+public class Body {
+    public static void main(String[] args) {
+        // Create a new live performance object.
+        LivePerformance erasTour = new LivePerformance("Taylor Swift", "Eras Tour", 2023, "Glendale") {{
+            addTracks("Lavender Haze", "All Too Well", "the lakes", "The Man", "Love Story");
+
+            addBackupSingers("Jeslyn", "Melanie");
+
+            addBackupDancers("Stephanie", "Jake");
+        }};
+
+        erasTour.startPerformance(); // Start the performance.
+    }
+}
+
+
+
+
+
+
+
+
+
+
+package performance;
+
+import artist.Singer;
+import artist.backupArtist.BackupSinger;
+import artist.backupArtist.BackupDancer;
+import org.jetbrains.annotations.NotNull;
+import track.Track;
+
+import java.util.ArrayList;
+
+public abstract class MusicalPerformance {
+    private final Singer mainArtist;
+    private String performanceName;
+    private final String venue;
+    private final int year;
+    private final ArrayList<Track> trackList;
+    private final ArrayList<BackupSinger> backupSingerList;
+    private final ArrayList<BackupDancer> backupDancerList;
+
+    // Constructor to initialize a musical performance
+    public MusicalPerformance(String mainArtistName, String performanceName, int year, String venue) {
+        this.mainArtist = new Singer(mainArtistName);
+        this.performanceName = performanceName;
+        this.year = year;
+        this.venue = venue;
+
+        trackList = new ArrayList<>();
+        backupSingerList = new ArrayList<>();
+        backupDancerList = new ArrayList<>();
+    }
+
+
+    // Accessor to get the main artist's name
+    public String getMainArtistName() {
+        return mainArtist.getName();
+    }
+
+
+    // Accessor to get the performance name
+    public String getPerformanceName() {
+        return performanceName;
+    }
+    // Mutator to set the performance name
+    public void setPerformanceName(String newPerformanceName) {
+        performanceName = newPerformanceName;
+    }
+
+
+    // Accessor to get the venue
+    public String getVenue() {
+        return venue;
+    }
+
+
+    // Accessor to get the year
+    public int getYear() {
+        return year;
+    }
+
+
+    // Add a track with unspecified 'duration' to 'trackList'.
+    public void addTrack(String trackName) {
+        // Create a 'Track' object.
+        Track trackToAdd = new Track(trackName);
+
+        /* If 'trackToAdd' is already present in the 'trackList', throw an error.
+         * Else, add it to 'trackList'.
+         */
+        if (trackList.contains(trackToAdd)) {
+            throw new DuplicateItemException("Duplicate track not allowed!");
+        }
+
+        trackList.add(trackToAdd);
+    }
+    // Add several tracks with unspecified duration to 'trackList'.
+    public void addTracks(String @NotNull ... trackNames) {
+        for (String trackName : trackNames) {
+            // Create a 'Track' object.
+            Track trackToAdd = new Track(trackName);
+
+            /* If 'trackToAdd' is already present in the 'trackList', throw an error.
+             * Else, add it to 'trackList'.
+             */
+            if (trackList.contains(trackToAdd)) {
+                throw new DuplicateItemException("Duplicate track not allowed!");
+            }
+
+            trackList.add(trackToAdd);
+        }
+    }
+    // Add a track to 'trackList'.
+    public void addTrack(String trackName, int duration) {
+        // Create a 'Track' object.
+        Track trackToAdd = new Track(trackName, duration);
+
+        /* If 'trackToAdd' is already present in the 'trackList', throw an error.
+         * Else, add it to 'trackList'.
+         */
+        if (trackList.contains(trackToAdd)) {
+            throw new DuplicateItemException("Duplicate track not allowed!");
+        }
+
+        trackList.add(trackToAdd);
+    }
+
+
+    // Add a backup singer to 'backupSingerList'.
+    public void addBackupSinger(String name) {
+        // Create a 'BackupSinger' object.
+        BackupSinger backupSingerToAdd = new BackupSinger(name);
+
+        /* If 'backupSingerToAdd' is already present in the 'backupSingerList', throw an error.
+         * Else, add it to 'backupSingerList'.
+         */
+        if (backupSingerList.contains(backupSingerToAdd)) {
+                throw new DuplicateItemException("Duplicate backup singer not allowed!");
+            }
+
+        backupSingerList.add(backupSingerToAdd);
+    }
+    // Add several backup singers to 'backupSingerList'.
+    public void addBackupSingers(String @NotNull ... names) {
+        for (String name : names) {
+            // Create a 'BackupSinger' object.
+            BackupSinger backupSingerToAdd = new BackupSinger(name);
+
+            /* If 'backupSingerToAdd' is already present in the 'backupSingerList', throw an error.
+             * Else, add it to 'backupSingerList'.
+             */
+            if (backupSingerList.contains(backupSingerToAdd)) {
+                throw new DuplicateItemException("Duplicate backup singer not allowed!");
+            }
+
+            backupSingerList.add(backupSingerToAdd);
+        }
+    }
+
+
+    // Add a backup dancer to 'backupDancerList'.
+    public void addBackupDancer(String name) {
+        // Create a 'BackupSinger' object.
+        BackupDancer backupDancerToAdd = new BackupDancer(name);
+
+        /* If 'backupDancerToAdd' is already present in the 'backupDancerList', throw an error.
+         * Else, add it to 'backupDancerList'.
+         */
+        if (backupDancerList.contains(backupDancerToAdd)) {
+                throw new DuplicateItemException("Duplicate backup dancer not allowed!");
+            }
+
+        backupDancerList.add(backupDancerToAdd);
+    }
+    // Add several backup dancers to 'backupDancerList'.
+    public void addBackupDancers(String @NotNull ... names) {
+        for (String name : names) {
+            // Create a 'BackupSinger' object.
+            BackupDancer backupDancerToAdd = new BackupDancer(name);
+
+            /* If 'backupDancerToAdd' is already present in the 'backupDancerList', throw an error.
+             * Else, add it to 'backupDancerList'.
+             */
+            if (backupDancerList.contains(backupDancerToAdd)) {
+                throw new DuplicateItemException("Duplicate backup dancer not allowed!");
+            }
+
+            backupDancerList.add(backupDancerToAdd);
+        }
+
+    }
+
+
+    // Facilitator method to start the performance
+    public void startPerformance() {
+        System.out.printf("Welcome to '%s' by '%s'!\n", this.getPerformanceName(), this.getMainArtistName());
+        mainArtist.perform();
+
+        for (BackupSinger backupSinger : backupSingerList) {
+            backupSinger.backup();
+        }
+        for (BackupDancer backupDancer : backupDancerList) {
+            backupDancer.backup();
+        }
+    }
+
+
+    // Abstract method 'record' to be implemented by child classes
+    public abstract void record();
+}
+
+
+
+
+
+
+
+
+
+
+package performance;
+
+public class LivePerformance extends MusicalPerformance {
+    // Constructor to initialize a live performance
+    public LivePerformance(String mainArtistName, String name, int year, String venue) {
+        super(mainArtistName, name, year, venue);
+    }
+
+
+    // Facilitator method to interact with the audience
+    public void interact() {
+        System.out.println("Let's interact.");
+        System.out.println("This is the {interact} method in {LivePerformance} class.");
+    }
+
+
+    // Facilitator method to record the performance
+    public void record() {
+        System.out.println("Recording...");
+        System.out.println("This is the {record} method in {LivePerformance} class.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+package performance;
+
+public class StudioPerformance extends MusicalPerformance {
+    // Constructor to initialize a studio performance
+    public StudioPerformance(String mainArtistName, String name, int year, String venue) {
+        super(mainArtistName, name, year, venue);
+    }
+
+
+    // Facilitator method to process audio
+    public void processAudio() {
+        System.out.println("Audio Processing...");
+    }
+
+
+    // Facilitator method to record the performance
+    public void record() {
+        System.out.println("Recording...");
+        System.out.println("This is the {record} method in {StudioPerformance} class.");
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+package performance;
+
+public class DuplicateItemException extends RuntimeException {
+    public DuplicateItemException(String message) {
+        super(message);
+    }
+}
+
+
+
+
+
+/**************************************************************************************package track**************************************************************************************/
+
+
+
+
+
+package track;
+
+import java.util.Objects;
+
+public class Track {
+    private final String name;
+    private int duration; // in seconds
+
+    // Constructor to initialize a music track(if the duration is not specified)
+    public Track(String name) {
+        this.name = name;
+        this.duration = 0;
+    }
+    // Constructor to initialize a music track
+    public Track(String name, int duration) {
+        this.name = name;
+        this.duration = duration;
+    }
+
+
+    // Accessor to get the track name
+    public String getName() {
+        return name;
+    }
+
+
+    // Accessor to get the track duration
+    public int getDuration() {
+        return duration;
+    }
+    // Mutator to set the track duration
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return duration == track.duration && Objects.equals(name, track.name);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, duration);
+    }
+}
+
+
+
+
+
+/**************************************************************************************package artist**************************************************************************************/
+
+
+
+
+
+package artist;
+
+import java.util.Objects;
+
+public abstract class Artist {
+    private final String name;
+
+    // Constructor to initialize an artist
+    public Artist(String name) {
+        this.name = name;
+    }
+
+
+    // Accessor to get the artist's name
+    public String getName() {
+        return name;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artist artist = (Artist) o;
+        return Objects.equals(name, artist.name);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+
+    // Abstract method 'perform' to be implemented by child classes
+    public abstract void perform();
+}
+
+
+
+
+
+
+
+
+
+
+package artist;
+
+import artist.Artist;
+
+public class Singer extends Artist {
+    // Constructor to initialize a singer
+    public Singer(String name) {
+        super(name);
+    }
+
+
+    // Facilitator method to perform
+    public void perform() {
+        System.out.printf("%s is singing.\n", this.getName());
+        System.out.println("This is the {perform} method in {Singer} class.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+package artist.backupArtist;
+
+import artist.Singer;
+
+public class BackupSinger extends Singer implements Backup {
+    // Constructor to initialize a backup singer
+    public BackupSinger(String name) {
+        super(name);
+    }
+
+
+    // Facilitator method to back up
+    public void backup() {
+        System.out.printf("%s is singing to backup the main singer.\n", this.getName());
+        System.out.println("This is the {backup} method in {BackupSinger} class.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+package artist.backupArtist;
+
+import artist.Artist;
+
+public class BackupDancer extends Artist implements Backup {
+    // Constructor to initialize a backup dancer
+    public BackupDancer(String name) {
+        super(name);
+    }
+
+
+    // Facilitator method to perform
+    public void perform() {
+        System.out.printf("%s is dancing.\n", this.getName());
+        System.out.println("This is the {perform} method in {BackupDancer} class.");
+    }
+
+
+    // Facilitator method to back up
+    public void backup() {
+        System.out.printf("%s is dancing to backup the main singer.\n", this.getName());
+        System.out.println("This is the {backup} method in {BackupDancer} class.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+package artist.backupArtist;
+
+public interface Backup {
+    // Abstract method 'backup' to be implemented by child classes
+    void backup();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
