@@ -10,6 +10,7 @@ public class BackupSinger extends Singer implements Backup {
 
 
     // Facilitator method to back up
+    @Override
     public void backup() {
         System.out.printf("%s is singing to backup the main singer.\n", this.getName());
         Backup.super.backup();
