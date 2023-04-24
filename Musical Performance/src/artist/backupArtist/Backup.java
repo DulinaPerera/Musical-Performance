@@ -1,6 +1,8 @@
 package artist.backupArtist;
 
 public interface Backup {
-    // Abstract method 'backup' to be implemented by child classes
-    void backup();
+    // Default method 'backup' to be overridden by child classes
+    public default void backup() {
+        System.out.print("This is the {backup} method defined in the {Backup} interface. ");
+    }
 }
