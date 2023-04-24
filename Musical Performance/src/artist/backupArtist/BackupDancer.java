@@ -17,8 +17,10 @@ public class BackupDancer extends Artist implements Backup {
 
 
     // Facilitator method to back up
+    @Override
     public void backup() {
         System.out.printf("%s is dancing to backup the main singer.\n", this.getName());
-        System.out.println("This is the {backup} method in {BackupDancer} class.");
+        Backup.super.backup();
+        System.out.println("And it is overridden in the {BackupDancer} class.");
     }
 }
